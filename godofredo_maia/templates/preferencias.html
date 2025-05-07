@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minhas Preferências</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #5a2d82;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .preferences {
+            margin-top: 20px;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+        .preferences p {
+            margin-bottom: 10px;
+        }
+        .recommendation-links a {
+            display: inline-block;
+            background-color: #5a2d82;
+            color: white;
+            padding: 8px 12px;
+            margin: 5px;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+        .recommendation-links a:hover {
+            background-color: #452366;
+        }
+        .message {
+            text-align: center;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #ffeeba;
+            border: 1px solid #ffecb5;
+            color: #664d03;
+            border-radius: 5px;
+        }
+        .back-link {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            color: #5a2d82;
+            text-decoration: none;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Minhas Preferências de Filmes</h1>
+
+        {% if no_preferences %}
+            <div class="message">
+                <p>Nenhuma preferência encontrada. Por favor, cadastre suas preferências.</p>
+                <p><a href="{{ url_for('cadastro') }}">Cadastrar Preferências</a></p>
+            </div>
+        {% else %}
+            <div class="preferences">
+                <p><strong>Nome:</strong> {{ user_name }}</p>
+                <p><strong>Gênero Favorito:</strong> {{ fav_genre }}</p>
+                <p><strong>Notificações por E-mail:</strong> {{ 'Sim' if email_notifications else 'Não' }}</p>
+
+                <h2>Recomendações para você:</h2>
+                <div class="recommendation-links">
+                    <p>Veja filmes do seu gênero favorito:</p>
+                    <a href="{{ url_for('recomendar', genero=fav_genre) }}">Recomendar Filmes de {{ fav_genre }}</a>
+                </div>
+            </div>
+        {% endif %}
+
+        <a href="{{ url_for('index') }}" class="back-link">Voltar para a Página Inicial</a>
+    </div>
+</body>
+</html>

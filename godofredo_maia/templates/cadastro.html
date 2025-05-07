@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Preferências</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #5a2d82;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        form {
+            display: grid;
+            gap: 15px;
+        }
+        label {
+            font-weight: bold;
+        }
+        input[type="text"],
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box; /* Garante que padding não aumente a largura */
+        }
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+        }
+        .checkbox-container input {
+            margin-right: 10px;
+        }
+        button {
+            background-color: #5a2d82;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #452366;
+        }
+        .back-link {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            color: #5a2d82;
+            text-decoration: none;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Cadastrar Preferências de Filmes</h1>
+        <form action="{{ url_for('cadastro') }}" method="post">
+            <div>
+                <label for="user_name">Nome do usuário:</label>
+                <input type="text" id="user_name" name="user_name" required>
+            </div>
+            <div>
+                <label for="fav_genre">Gênero favorito:</label>
+                <select id="fav_genre" name="fav_genre" required>
+                    <option value="Ação">Ação</option>
+                    <option value="Comédia">Comédia</option>
+                    <option value="Drama">Drama</option>
+                    <option value="Ficção">Ficção</option>
+                    <option value="Terror">Terror</option>
+                </select>
+            </div>
+            <div class="checkbox-container">
+                <input type="checkbox" id="email_notifications" name="email_notifications">
+                <label for="email_notifications">Notificações por e-mail?</label>
+            </div>
+            <button type="submit">Salvar Preferências</button>
+        </form>
+        <a href="{{ url_for('index') }}" class="back-link">Voltar para a Página Inicial</a>
+    </div>
+</body>
+</html>

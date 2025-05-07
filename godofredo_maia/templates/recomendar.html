@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recomendações de Filmes</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #5a2d82;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        h2 {
+            color: #333;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+        }
+        ul {
+            list-style: disc;
+            margin-left: 20px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+         .message {
+            text-align: center;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #ffeeba;
+            border: 1px solid #ffecb5;
+            color: #664d03;
+            border-radius: 5px;
+        }
+         .recommendation-links a {
+            display: inline-block;
+            background-color: #5a2d82;
+            color: white;
+            padding: 8px 12px;
+            margin: 5px;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+        .recommendation-links a:hover {
+            background-color: #452366;
+        }
+        .back-link {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            color: #5a2d82;
+            text-decoration: none;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Recomendações de Filmes</h1>
+
+        {% if genero %}
+            <h2>Filmes do gênero: {{ genero }}</h2>
+            {% if filmes %}
+                <ul>
+                    {% for filme in filmes %}
+                        <li>{{ filme }}</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                 <div class="message">
+                    <p>Nenhuma recomendação encontrada para o gênero "{{ genero }}".</p>
+                 </div>
+            {% endif %}
+        {% else %}
+            <div class="message">
+                <p>Por favor, selecione um gênero para receber recomendações.</p>
+            </div>
+        {% endif %}
+
+        {% if generos_disponiveis %}
+            <h2>Ver recomendações por gênero:</h2>
+            <div class="recommendation-links">
+                {% for g in generos_disponiveis %}
+                    <a href="{{ url_for('recomendar', genero=g) }}">{{ g }}</a>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <a href="{{ url_for('index') }}" class="back-link">Voltar para a Página Inicial</a>
+    </div>
+</body>
+</html>
